@@ -46,7 +46,23 @@ Once you've exported, I recommend loading the Collada version into Altspace to t
 
 ## <a id="convert"/>Convert your model into glTF
 
+Now we're going to take the Collada file you exported, and convert it to glTF. To do this, we'll need the `collada2gltf` tool found [here](https://github.com/KhronosGroup/glTF/releases). Get the latest build for your platform, and extract the archive somewhere you can get to it.
 
+This tool is a command-line tool, so you'll need to run it from a terminal. Start the terminal ("cmd" on Windows, "Terminal" on OSX and Ubuntu), and run `collada2gltf` with `-k` for common materials, and `-f mymodel.dae` for the input file. It should look something like this:
+
+```
+C:\Users\username> c:\collada2gltf\collada2gltf.exe -k -f model.dae
+converting:model.dae ... as model.gltf 
+[geometry] 1134648 bytes
+[animations] 0 bytes
+[scene] total bytes:1134648
+[completed conversion]
+Runtime: 0.39 seconds
+```
+
+This will output the gltf/bin files to the same directory as the input file. You now have a valid glTF model, but we need to optimize it for Altspace. Open up the `.gltf` file in a text editor, and find/replace all instances of the word "PHONG" with "CONSTANT". Save the file.
+
+The model will now load correctly in Altspace, but will still throw a bunch of warnings when loaded. If you don't care about warnings, or don't understand JSON, skip to the next section. Otherwise, we'll need to make some more changes. Open the `.gltf` file in your text editor again, and scroll down to the property `materials`. Under each material, delete the properties `ambient`, `emission`, `shininess`, and `specular`, so that only the property `diffuse` is left.
 
 
 ## <a id="load"/>Load your model into Altspace
@@ -74,14 +90,48 @@ Once you've exported, I recommend loading the Collada version into Altspace to t
 </html>
 ```
 
+### Three.js glTF Previewer
 
-* Blender: use Blender Render, shadeless materials, "face textures" materials, texture color space settings correct
-* Export to dae
-* In dae, for each material definition:
-	* change `phong` to `constant`
-	* delete all values except for `diffuse`
-	* change `diffuse` to `emission`
-	* fix texture paths if necessary
-* `collada2gltf -f [[dae file]] -k`
-* In gltf, for each material definition:
-	* change `emission` to `diffuse`
+```html
+<html>
+	<head>
+		<title>glTF Test</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.js'></script>
+		<script src='three-glTFLoader.js'></script>
+	</head>
+	<body>
+		<script>
+		var scene = new THREE.Scene();
+
+		if(altspace && altspace.inClient){
+			var renderer = altspace.getThreeJSRenderer();
+		}
+		else {
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize(1024, 1024);
+			renderer.setClearColor( 0x808080 );
+			document.body.appendChild(renderer.domElement);
+
+			var camera = new THREE.OrthographicCamera(-1.5, 1.5, 1.5, -1.5, 0.1, 100);
+			camera.up.set(0,0,1);
+			camera.position.set(4, 0, 1.5);
+			camera.lookAt(new THREE.Vector3(0, 0, 1.5));
+			scene.add(camera);
+		}
+
+		var loader = new THREE.glTFLoader();
+		loader.load('YOUR URL HERE', function(result)
+		{
+			var model = result.scene.children[0].children[0];
+			scene.add(model);
+		});
+
+		window.requestAnimationFrame(function animate(dv){
+			window.requestAnimationFrame(animate);
+			renderer.render(scene, camera);
+		});
+
+		</script>
+	</body>
+</html>
+```

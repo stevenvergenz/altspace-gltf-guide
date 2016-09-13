@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>A-Frame Collada Previewer</title>
+    <script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/AltspaceVR/aframe-altspace-component/v0.2.2/dist/aframe-altspace-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene altspace="usePixelScale: false" scale="1 1 1">
+      <a-assets>
+        <a-asset-item id="test" src="YOUR URL HERE"></a-asset-item>
+      </a-assets>
+      <a-collada-model src="#test" position="0 0 0" rotation="0 0 0" scale="1 1 1"></a-collada-model>
+    </a-scene>
+  </body>
+</html>

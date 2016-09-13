@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>glTF Test</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.js'></script>
+		<script src='three-glTFLoader.js'></script>
+	</head>
+	<body>
+		<script>
+		var scene = new THREE.Scene();
+
+		if(altspace && altspace.inClient){
+			var renderer = altspace.getThreeJSRenderer();
+		}
+		else {
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize(1024, 1024);
+			renderer.setClearColor( 0x808080 );
+			document.body.appendChild(renderer.domElement);
+
+			var camera = new THREE.OrthographicCamera(-1.5, 1.5, 1.5, -1.5, 0.1, 100);
+			camera.up.set(0,0,1);
+			camera.position.set(4, 0, 1.5);
+			camera.lookAt(new THREE.Vector3(0, 0, 1.5));
+			scene.add(camera);
+		}
+
+		var loader = new THREE.glTFLoader();
+		loader.load('YOUR URL HERE', function(result)
+		{
+			var model = result.scene.children[0].children[0];
+			scene.add(model);
+		});
+
+		window.requestAnimationFrame(function animate(dv){
+			window.requestAnimationFrame(animate);
+			renderer.render(scene, camera);
+		});
+
+		</script>
+	</body>
+</html>
