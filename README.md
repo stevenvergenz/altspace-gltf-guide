@@ -31,7 +31,7 @@ Geometry export is fairly straightforward with Blender, but it's quite common fo
 1. **Make sure you're using Blender Render.**
     Cycles is not well-supported right now with the various exporters, so even if you're doing your lighting/baking/etc. with Cycles, you'll still need to switch it back to Blender Render for export. Similarly, none of your materials can use shader nodes.
 
-2. **Format materials.** For all the materials on the scene you're exporting, enable the *Shadeless* and *Face Textures* flags. These will prevent Blender from exporting a ton of material properties that Altspace won't use, and help keep your final output files small.
+2. **Format materials.** For all the materials on the scene you're exporting, enable the *Shadeless* and *Face Textures* flags. These will prevent Blender from exporting a ton of material properties that Altspace won't use, and helps keep your final output files small.
 
     ![material flags](img/material-flags.png)
 
@@ -81,7 +81,7 @@ loader.load('YOUR URL HERE', function(gltf)
 });
 ```
 
-The object passed into the callback is not a simple THREE.Object3D though, it's a data structure containing several different things. To get the assembled model object, what you usually want is `gltf.scene.children[0].children[0]`. This strips away two layers of "top-level" objects, and leaves you with just what was exported. Test it with your own app, or use the previewer in the [Resources](#resources) section below.
+The object passed into the callback is not a simple THREE.Object3D, it's a data structure containing several different things. To get the assembled model object, what you usually want is `gltf.scene.children[0].children[0]`. This strips away two layers of "top-level" objects, and leaves you with just what was exported. Test it with your own app, or use the previewer in the [Resources](#resources) section below.
 
 
 ## <a id="resources"/>Resources
