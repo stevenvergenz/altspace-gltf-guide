@@ -1,8 +1,10 @@
 # Using glTF Models In AltspaceVR With Blender
 
+glTF is a modern 3d model format designed explicitly for delivery and display over the web, unlike Collada, FBX, and OBJ/MTL, which were originally meant for art tools. 
+
 This guide will walk you through the [glTF](https://github.com/KhronosGroup/glTF) asset creation pipeline, starting from model creation in [Blender](https://www.blender.org/), through export, conversion, and finally import into [AltspaceVR](https://altvr.com) via [Three.js](http://threejs.org/). This guide was written for the following software versions: Blender 2.77a, collada2gltf@d78daf1, and glTFLoader from Three.js r78.
 
-glTF is unique as an interchange format. A model is expressed as two files: a `.gltf` file, which is JSON-formatted text describing the object hierarchy, materials, etc., and a `.bin` file, which is your binary geometry data. You need both to use the model. While it's also possible to embed the binary into the `.gltf` file, this is not recommended because it is not as efficient, though it's still more efficient than OBJ/MTL or Collada, so this is a personal choice.
+In glTF, a model is expressed as two files: a `.gltf` file, which is JSON-formatted text describing the object hierarchy, materials, etc., and a `.bin` file, which is your binary geometry data. You need both to use the model. While it's also possible to embed the binary into the `.gltf` file, this is not recommended because it is not as efficient, though it's still more efficient than OBJ/MTL or Collada, so this is a personal choice.
 
 * [Why use glTF?](#why)
 * Step 1: [Export your model from Blender](#export)
