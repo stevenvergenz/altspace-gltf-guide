@@ -1,0 +1,26 @@
+{
+  "name": "altspace-gltf-guide",
+  "version": "1.0.0",
+  "description": "This guide will walk you through the [glTF](https://github.com/KhronosGroup/glTF) asset creation pipeline, starting from model creation in [Blender](https://www.blender.org/), through export, conversion, and finally import into [AltspaceVR](https://altvr.com) via [Three.js](http://threejs.org/). This guide was written for the following software versions: Blender 2.77a, collada2gltf@d78daf1, and glTFLoader from Three.js r78.",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenvergenz/altspace-gltf-guide.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevenvergenz/altspace-gltf-guide/issues"
+  },
+  "homepage": "https://github.com/stevenvergenz/altspace-gltf-guide#readme"
+}
