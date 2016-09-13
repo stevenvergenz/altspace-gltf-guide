@@ -22,7 +22,8 @@ glTF is unique as an interchange format. A model is expressed as two files: a `.
 2. It produces a smaller model file, which means less bandwidth used and shorter load times.
 
 	Another benefit of storing things in binary is compactness. Remember that number `0.678207` from before? Stored as a string, it looks like this in memory: `30 2e 36 37 38 32 30 37` (8 bytes). That same number in [binary](https://en.wikipedia.org/wiki/Single-precision_floating-point_format) looks like `3f 2d 9e f9` (only 4 bytes). Since each vertex in your model is stored as a minimum of three numbers like the above, that means you're saving at least 12 bytes per vertex, or 1.2MB on a 100k vertex model. After normals and UV coordinates, your typical savings will be 2-5 times larger than this minimum example, so that's a huge savings!
-	
+
+The only downside to the use of glTF right now is that the Three.js loader does not accept an error callback. So if the loader fails (because the URL returns a 404 Not Found for example), the callback is simply not executed, and there's currently no way to detect that error. This is a problem if you're guessing URLs, but is inconsequential if you have complete control of the source directory, and can guarantee that a model exists.
 
 ## <a id="export"/>Export your model from Blender
 
