@@ -67,6 +67,22 @@ The model will now load correctly in Altspace, but will still throw a bunch of w
 
 ## <a id="load"/>Load your model into Altspace
 
+Include the glTF Three.js loader in your code via a `<script>` tag in your HTML. You can get the loader [here](three-glTFLoader.js) or [here (minified)](three-glTFLoader.min.js). This code is compiled from a Three.js r78 example, and is already documented in the [Three.js SDK docs](http://threejs.org/docs/#Reference/Loaders/glTFLoader).
+
+You then call the loader like this:
+
+```javascript
+var loader = new THREE.glTFLoader();
+loader.load('YOUR URL HERE', function(gltf)
+{
+    // process model here
+
+    scene.add( gltf.scene.children[0].children[0] );
+});
+```
+
+The object passed into the callback is not a simple THREE.Object3D though, it's a data structure containing several different things. To get the assembled model object, what you usually want is `gltf.scene.children[0].children[0]`. This strips away two layers of "top-level" objects, and leaves you with just what was exported. Test it with your own app, or use the previewer in the [Resources](#resources) section below.
+
 
 ## <a id="resources"/>Resources
 
